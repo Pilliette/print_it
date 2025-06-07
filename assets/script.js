@@ -17,6 +17,8 @@ const slides = [
 	}
 ]
 
+// Flèches directionnelles à l'écoute au clic
+
 const left = document.getElementById(`arrow_left`)
 const right = document.getElementById(`arrow_right`)
 
@@ -26,4 +28,16 @@ left.addEventListener(`click`, () => {
 
 right.addEventListener(`click`, () => {
 	console.log("Flèche droite fonctionnelle")
+})
+
+// Création des bullet points
+
+slides.forEach(image => {
+	const divDot = document.createElement("div")
+	divDot.classList.add("dot", "dot_selected")
+
+	const parentDots = document.querySelector(".dots")
+	parentDots.appendChild(divDot)
+
+	
 })
