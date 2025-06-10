@@ -1,4 +1,4 @@
-// Tableau d'images
+// Tableau d'images et de textes
 
 const slides = [
 	{
@@ -19,24 +19,34 @@ const slides = [
 	}
 ]
 
-// Sélection des flèches
+// Sélection des flèches, des images et des textes
 
 const left = document.getElementById(`arrow_left`)
 const right = document.getElementById(`arrow_right`)
+
+function updateSlide() {
+	const images = document.querySelector(".banner-img")
+	const texts = document.querySelector(".banner__texte p")
+
+	images.src = "./assets/images/slideshow/" + slides[changeDots].image
+	texts.innerHTML = slides[changeDots].tagLine
+}
 
 // Fonctionnement de la flèche gauche
 
 left.addEventListener(`click`, () => {
 	console.log("Flèche gauche fonctionnelle")
 	
-	slidesDots[changeDots].classList.remove("dot_selected")
+	slidesTab[changeDots].classList.remove("dot_selected")
 
 	changeDots--
 
 	if (changeDots < 0) {
-		changeDots = slidesDots.length - 1
+		changeDots = slidesTab.length - 1
 	}
-	slidesDots[changeDots].classList.add("dot_selected")
+	slidesTab[changeDots].classList.add("dot_selected")
+
+	updateSlide()
 })
 
 // Fonctionnement de la flèche droite
@@ -44,19 +54,21 @@ left.addEventListener(`click`, () => {
 right.addEventListener(`click`, () => {
 	console.log("Flèche droite fonctionnelle")
 
-	slidesDots[changeDots].classList.remove("dot_selected")
+	slidesTab[changeDots].classList.remove("dot_selected")
 
 	changeDots++
 
-	if (changeDots >= slidesDots.length) {
+	if (changeDots >= slidesTab.length) {
 		changeDots = 0
 	}
-	slidesDots[changeDots].classList.add("dot_selected")
+	slidesTab[changeDots].classList.add("dot_selected")
+
+	updateSlide()
 })
 
 // Initialisation des dots
 
-const slidesDots = []
+const slidesTab = []
 const parentDots = document.querySelector(".dots")
 let changeDots = 0
 
@@ -67,7 +79,26 @@ slides.forEach(image => {
 	divDot.classList.add("dot")
 	parentDots.appendChild(divDot)
 
-	slidesDots.push(divDot)
+	slidesTab.push(divDot)
 })
 
-slidesDots[changeDots].classList.add("dot_selected")
+slidesTab[changeDots].classList.add("dot_selected")
+
+// Défilement infini
+
+setInterval(() => {
+	slidesTab[changeDots].classList.remove("dot_selected")
+
+	changeDots++
+
+	if (changeDots >= slidesTab.length) {
+		changeDots = 0
+	}
+	slidesTab[changeDots].classList.add("dot_selected")
+
+	updateSlide()
+}, 2000)
+
+// Initialisation des images et des textes
+
+updateSlide()
