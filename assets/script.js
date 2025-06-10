@@ -25,26 +25,26 @@ const left = document.getElementById(`arrow_left`)
 const right = document.getElementById(`arrow_right`)
 
 function updateSlide() {
-	const images = document.querySelector(".banner-img")
-	const texts = document.querySelector(".banner__texte p")
+	const images = document.querySelector(`.banner-img`)
+	const texts = document.querySelector(`.banner__texte p`)
 
-	images.src = "./assets/images/slideshow/" + slides[changeDots].image
+	images.src = `./assets/images/slideshow/${slides[changeDots].image}`
 	texts.innerHTML = slides[changeDots].tagLine
 }
 
 // Fonctionnement de la flèche gauche
 
 left.addEventListener(`click`, () => {
-	console.log("Flèche gauche fonctionnelle")
+	console.log(`Flèche gauche fonctionnelle`)
 	
-	slidesTab[changeDots].classList.remove("dot_selected")
+	slidesTab[changeDots].classList.remove(`dot_selected`)
 
 	changeDots--
 
 	if (changeDots < 0) {
 		changeDots = slidesTab.length - 1
 	}
-	slidesTab[changeDots].classList.add("dot_selected")
+	slidesTab[changeDots].classList.add(`dot_selected`)
 
 	updateSlide()
 })
@@ -52,16 +52,16 @@ left.addEventListener(`click`, () => {
 // Fonctionnement de la flèche droite
 
 right.addEventListener(`click`, () => {
-	console.log("Flèche droite fonctionnelle")
+	console.log(`Flèche droite fonctionnelle`)
 
-	slidesTab[changeDots].classList.remove("dot_selected")
+	slidesTab[changeDots].classList.remove(`dot_selected`)
 
 	changeDots++
 
 	if (changeDots >= slidesTab.length) {
 		changeDots = 0
 	}
-	slidesTab[changeDots].classList.add("dot_selected")
+	slidesTab[changeDots].classList.add(`dot_selected`)
 
 	updateSlide()
 })
@@ -69,32 +69,32 @@ right.addEventListener(`click`, () => {
 // Initialisation des dots
 
 const slidesTab = []
-const parentDots = document.querySelector(".dots")
+const parentDots = document.querySelector(`.dots`)
 let changeDots = 0
 
 // Création des dots
 
 slides.forEach(image => {
-	const divDot = document.createElement("div")
-	divDot.classList.add("dot")
+	const divDot = document.createElement(`div`)
+	divDot.classList.add(`dot`)
 	parentDots.appendChild(divDot)
 
 	slidesTab.push(divDot)
 })
 
-slidesTab[changeDots].classList.add("dot_selected")
+slidesTab[changeDots].classList.add(`dot_selected`)
 
 // Défilement infini
 
 setInterval(() => {
-	slidesTab[changeDots].classList.remove("dot_selected")
+	slidesTab[changeDots].classList.remove(`dot_selected`)
 
 	changeDots++
 
 	if (changeDots >= slidesTab.length) {
 		changeDots = 0
 	}
-	slidesTab[changeDots].classList.add("dot_selected")
+	slidesTab[changeDots].classList.add(`dot_selected`)
 
 	updateSlide()
 }, 2000)
