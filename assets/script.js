@@ -66,7 +66,7 @@ right.addEventListener(`click`, () => {
 	updateSlide()
 })
 
-// Initialisation des dots, des images et des textes
+// Initialisation des dots
 
 const slidesTab = []
 const parentDots = document.querySelector(".dots")
@@ -83,5 +83,22 @@ slides.forEach(image => {
 })
 
 slidesTab[changeDots].classList.add("dot_selected")
+
+// Défilement infini
+
+setInterval(() => {
+	slidesTab[changeDots].classList.remove("dot_selected")
+
+	changeDots++
+
+	if (changeDots >= slidesTab.length) {
+		changeDots = 0
+	}
+	slidesTab[changeDots].classList.add("dot_selected")
+
+	updateSlide()
+}, 2000)
+
+// Initialisation des images et des textes
 
 updateSlide()
